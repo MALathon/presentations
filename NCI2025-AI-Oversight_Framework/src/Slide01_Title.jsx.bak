@@ -132,30 +132,12 @@ const PresenterCard = styled.div`
   position: relative;
 `;
 
-const AuthorsLabel = styled.p`
-  font-size: 16px;
-  color: #00A3E0;
-  margin: 0 0 15px 0;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  opacity: 0.9;
-`;
-
-const PresentersWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-`;
-
 const PresenterName = styled.h3`
-  font-size: ${props => props.$isSpeaker ? '32px' : '28px'};
+  font-size: 30px;
   color: #FFFFFF;
-  font-weight: ${props => props.$isSpeaker ? '600' : '400'};
-  margin: 0;
+  font-weight: 500;
+  margin: 0 0 8px 0;
   letter-spacing: 0.5px;
-  opacity: ${props => props.$isSpeaker ? '1' : '0.85'};
 `;
 
 const PresenterTitle = styled.p`
@@ -378,11 +360,7 @@ const Slide01_Title = () => {
         </Tagline>
         
         <PresenterCard>
-          <AuthorsLabel>Authors</AuthorsLabel>
-          <PresentersWrapper>
-            <PresenterName $isSpeaker={true}>Mark Lifson, PhD</PresenterName>
-            <PresenterName $isSpeaker={false}>Tamiko Eto</PresenterName>
-          </PresentersWrapper>
+          <PresenterName>Mark Lifson, PhD</PresenterName>
         </PresenterCard>
       </ContentWrapper>
       
