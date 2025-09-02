@@ -150,12 +150,11 @@ const PresentersWrapper = styled.div`
 `;
 
 const PresenterName = styled.h3`
-  font-size: ${props => props.$isSpeaker ? '32px' : '28px'};
-  color: #FFFFFF;
-  font-weight: ${props => props.$isSpeaker ? '600' : '400'};
+  font-size: 30px;
+  color: ${props => props.$isSpeaker ? '#FFD700' : '#FFFFFF'};
+  font-weight: 500;
   margin: 0;
   letter-spacing: 0.5px;
-  opacity: ${props => props.$isSpeaker ? '1' : '0.85'};
 `;
 
 const PresenterTitle = styled.p`
