@@ -1,0 +1,14 @@
+{
+  "name": "presentations",
+  "version": "1.0.0",
+  "description": "Mark Lifson's Research Presentations",
+  "private": true,
+  "scripts": {
+    "build:nci": "cd NCI2025-AI-Oversight_Framework && npm install && npm run build",
+    "build:all": "npm run build:nci",
+    "deploy": "npm run build:all && gh-pages -d ."
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  }
+}
