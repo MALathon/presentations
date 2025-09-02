@@ -142,12 +142,51 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .card a {
-            display: block;
+        .card {
             padding: 30px;
+        }
+        
+        .card-link {
+            display: block;
             text-decoration: none;
             color: inherit;
-            height: 100%;
+            margin: -30px -30px 0 -30px;
+            padding: 30px 30px 20px 30px;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        
+        .card-action-btn {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-download {
+            background: linear-gradient(135deg, rgba(74, 226, 192, 0.1) 0%, rgba(102, 126, 234, 0.1) 100%);
+            border: 1px solid rgba(74, 226, 192, 0.25);
+            color: #86efac;
+        }
+        
+        .btn-download:hover {
+            background: linear-gradient(135deg, rgba(74, 226, 192, 0.2) 0%, rgba(102, 126, 234, 0.15) 100%);
+            border-color: rgba(74, 226, 192, 0.4);
+            color: #bbf7d0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 226, 192, 0.2);
         }
 
         .card-header {
@@ -297,8 +336,13 @@
                 gap: 20px;
             }
             
-            .card a {
+            .card {
                 padding: 25px;
+            }
+            
+            .card-link {
+                margin: -25px -25px 0 -25px;
+                padding: 25px 25px 15px 25px;
             }
         }
 
@@ -329,7 +373,7 @@
         
         <div class="presentations-grid">
             <div class="card">
-                <a href="./NCI2025-AI-Oversight_Framework/dist/">
+                <a href="./NCI2025-AI-Oversight_Framework/dist/" class="card-link">
                     <div class="card-header">
                         <span class="card-date">NCI 2025</span>
                         <svg class="card-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -347,16 +391,14 @@
                         <span class="tag">Interactive</span>
                     </div>
                 </a>
-                <div style="margin-top: 15px; padding: 0 30px 20px;">
+                <div class="card-actions">
                     <a href="./NCI2025-AI-Oversight_Framework/dist/AI-Research-Oversight-Framework.pdf" 
-                       style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(102, 126, 234, 0.1); border: 1px solid rgba(102, 126, 234, 0.3); border-radius: 8px; color: #94a3b8; text-decoration: none; font-size: 0.875rem; transition: all 0.3s ease;"
-                       onmouseover="this.style.background='rgba(102, 126, 234, 0.2)'; this.style.color='#fff';"
-                       onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'; this.style.color='#94a3b8';"
+                       class="card-action-btn btn-download"
                        download>
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
                         </svg>
-                        Download PDF
+                        Download PDF (3.5 MB)
                     </a>
                 </div>
             </div>
