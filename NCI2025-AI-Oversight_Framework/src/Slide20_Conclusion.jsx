@@ -1,171 +1,159 @@
 import React from 'react';
-import useSlideAnimation from './hooks/useSlideAnimation';
 import { Notes } from 'spectacle';
 import SlideWrapper from './components/SlideWrapper'
 import InteractionHint from './components/InteractionHint';
-import styled, { keyframes } from 'styled-components';
-
-const titleAnimation = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+import styled from 'styled-components';
 
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   height: 100%;
-  padding: 20px 40px;
-  overflow-y: auto;
+  padding: 40px;
+  position: relative;
 `;
 
-// Title removed per user request
+const QuestionsTitle = styled.h1`
+  font-size: 72px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 50px;
+  text-align: center;
+  letter-spacing: -1px;
+`;
 
-const SummaryBox = styled.div`
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 20px 30px;
-  max-width: 750px;
+const SummarySection = styled.div`
+  max-width: 700px;
   width: 100%;
-  opacity: ${props => props.$visible ? 1 : 0};
-  transform: translateY(${props => props.$visible ? 0 : '20px'});
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: 0.3s;
+  margin-bottom: 20px;
+  text-align: center;
 `;
 
-const SummaryText = styled.div`
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 14px;
+const SummaryText = styled.p`
+  color: #4AE2C0;
+  font-size: 20px;
   line-height: 1.6;
+  margin-bottom: 30px;
+  font-weight: 300;
+`;
+
+const KeyPoints = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
   text-align: left;
+  display: inline-block;
+`;
+
+const KeyPoint = styled.li`
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 18px;
+  margin-bottom: 12px;
+  padding-left: 25px;
+  position: relative;
   
-  ul {
-    margin: 10px 0;
-    padding-left: 20px;
-    list-style: none;
+  &::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #4AE2C0;
+    font-size: 20px;
   }
+`;
+
+const ContactSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 30px;
+`;
+
+const QRCodeContainer = styled.div`
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+`;
+
+const QRCodeImage = styled.img`
+  width: 100px;
+  height: 100px;
+  display: block;
+`;
+
+const ContactInfo = styled.div`
+  text-align: left;
+`;
+
+const ContactText = styled.p`
+  color: #4AE2C0;
+  font-size: 16px;
+  margin: 5px 0;
+  font-weight: 300;
   
-  li {
-    margin-bottom: 6px;
-    position: relative;
-    padding-left: 15px;
+  a {
+    color: #4AE2C0;
+    text-decoration: none;
     
-    &::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: #4AE2C0;
-      font-size: 16px;
+    &:hover {
+      text-decoration: underline;
     }
   }
 `;
 
-const CallToActionBox = styled.div`
-  margin-top: 20px;
-  background: linear-gradient(135deg, rgba(74, 226, 192, 0.08) 0%, rgba(74, 226, 192, 0.03) 100%);
-  border: 2px solid rgba(74, 226, 192, 0.25);
-  border-radius: 12px;
-  padding: 18px 25px;
-  text-align: center;
-  opacity: ${props => props.$visible ? 1 : 0};
-  transform: translateY(${props => props.$visible ? 0 : '10px'});
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: 0.6s;
-  max-width: 600px;
-  width: 100%;
-`;
-
-const CTATitle = styled.h3`
-  color: #4AE2C0;
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0 0 8px 0;
-  letter-spacing: 0.5px;
-`;
-
-const CTAText = styled.p`
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 13px;
-  line-height: 1.4;
-  margin: 0 0 10px 0;
-`;
-
-const ContactLine = styled.div`
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 13px;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-`;
-
-const Slide20 = () => {
-  const { step } = useSlideAnimation(3, 'slide-20-conclusion');
-
+const Slide20_Conclusion = () => {
   return (
     <SlideWrapper 
       slideNumber={20}
-      slideTitle="Conclusion"
+      slideTitle="Questions & Discussion"
       totalSlides={20}
-      background="radial-gradient(ellipse at center, #0066CC 0%, #003B71 70%, #001833 100%)"
     >
+      <ContentWrapper>
+        <QuestionsTitle>Questions?</QuestionsTitle>
+        
+        <SummarySection>
+          <SummaryText>
+            A practical three-question framework for AI research oversight
+          </SummaryText>
+          
+          <KeyPoints>
+            <KeyPoint>Is this human subjects research requiring IRB review?</KeyPoint>
+            <KeyPoint>What is the potential for impact on human subjects?</KeyPoint>
+            <KeyPoint>Is the technical risk acceptable relative to benefits?</KeyPoint>
+          </KeyPoints>
+        </SummarySection>
+        
+        <ContactSection>
+          <QRCodeContainer>
+            <QRCodeImage src="./qrcode_www.linkedin.com.png" alt="LinkedIn QR Code" />
+          </QRCodeContainer>
+          
+          <ContactInfo>
+            <ContactText>lifson.mark@mayo.edu</ContactText>
+            <ContactText>
+              <a href="https://linkedin.com/in/marklifson" target="_blank" rel="noopener noreferrer">
+                linkedin.com/in/marklifson
+              </a>
+            </ContactText>
+          </ContactInfo>
+        </ContactSection>
+      </ContentWrapper>
+      
       <InteractionHint>
         <kbd>←</kbd> <kbd>→</kbd> Navigate
       </InteractionHint>
-
-      <ContentWrapper>
-        <SummaryBox $visible={true} style={{ marginTop: '30px' }}>
-          <SummaryText>
-            We've explored a practical framework that balances:
-            
-            <ul>
-              <li>Technical complexity with reviewable criteria</li>
-              <li>Innovation pace with patient safety</li>
-              <li>Flexibility with consistent principles</li>
-            </ul>
-            
-            The three-question approach provides structure without requiring AI expertise.
-            This is a conversation starter — your institutions have unique needs and contexts.
-          </SummaryText>
-        </SummaryBox>
-
-        <CallToActionBox $visible={true}>
-          <CTATitle>Questions & Discussion</CTATitle>
-          <CTAText>
-            Thank you for your attention. I welcome your questions, challenges, and perspectives.
-            <br/>
-            Let's explore how this framework might work in your context.
-          </CTAText>
-          <ContactLine>
-            lifson.mark@mayo.edu | linkedin.com/in/marklifson
-          </ContactLine>
-        </CallToActionBox>
-      </ContentWrapper>
-
+      
       <Notes>
-        Closing remarks (90 seconds):
+        Closing (60 seconds):
         
-        We've covered a lot of ground today. The key takeaway isn't that we have all the answers - 
-        it's that we have a framework for asking better questions.
+        Thank you for your attention today. We've explored a practical three-question framework 
+        that can help streamline AI research oversight without requiring specialized AI expertise.
         
-        The three-question approach gives us a common language for discussing AI research oversight
-        without requiring everyone to become machine learning experts.
+        The key is not having all the answers, but having the right framework for asking questions.
         
-        This framework will evolve. It has to. AI technology changes too quickly for any static 
-        approach to remain relevant.
+        I welcome your thoughts, questions, and experiences as we all navigate this evolving landscape together.
         
-        What matters is that we start somewhere - with clear principles, practical tools, and 
-        institutional flexibility.
-        
-        I appreciate your time and attention. I'm interested in your thoughts and experiences
-        as we all navigate this new territory together.
+        Please feel free to reach out - I'm always interested in learning how different institutions 
+        are approaching these challenges.
         
         Thank you.
       </Notes>
@@ -173,4 +161,4 @@ const Slide20 = () => {
   );
 };
 
-export default Slide20;
+export default Slide20_Conclusion;

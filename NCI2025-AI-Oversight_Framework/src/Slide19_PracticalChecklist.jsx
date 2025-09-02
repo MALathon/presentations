@@ -4,7 +4,6 @@ import { Notes } from 'spectacle';
 import SlideWrapper from './components/SlideWrapper';
 import InteractionHint from './components/InteractionHint';
 import { techCategories, getRecommendedControls } from './techCharacteristics';
-import qrCodeImage from '../qrcode_www.linkedin.com.png';
 
 // Robust quantitative scoring system with comprehensive filtering
 
@@ -1356,19 +1355,6 @@ const Slide19PracticalChecklist = () => {
               Seeking Collaborators & Feedback
             </div>
             
-            <img 
-              src={qrCodeImage}
-              alt="LinkedIn QR Code"
-              style={{
-                width: '110px',
-                height: '110px',
-                border: '3px solid rgba(220, 20, 20, 0.5)',
-                borderRadius: '4px',
-                background: 'white',
-                padding: '4px',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
-              }}
-            />
           </div>
         </DisclaimerWatermark>
       )}

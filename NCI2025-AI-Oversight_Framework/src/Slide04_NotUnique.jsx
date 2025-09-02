@@ -593,7 +593,7 @@ const Slide4 = () => {
       </Notes>
       
       <InteractionHint>
-        <kbd>←</kbd> <kbd>→</kbd> Navigate
+        <kbd>Space</kbd> Advance <span className="separator">•</span> <kbd>R</kbd> Reset <span className="separator">•</span> Click rows to highlight <span className="separator">•</span> <kbd>←</kbd> <kbd>→</kbd> Navigate
       </InteractionHint>
     </SlideWrapper>
   );

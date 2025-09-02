@@ -266,7 +266,7 @@ const Slide3 = () => {
       </MainContainer>
       
       <InteractionHint>
-        <kbd>←</kbd> <kbd>→</kbd> Navigate
+        <kbd>Space</kbd> Reveal concerns <span className="separator">•</span> <kbd>R</kbd> Reset <span className="separator">•</span> <kbd>←</kbd> <kbd>→</kbd> Navigate
       </InteractionHint>
       
       <Notes>

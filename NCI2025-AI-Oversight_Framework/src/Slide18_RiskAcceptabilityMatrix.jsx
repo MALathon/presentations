@@ -1473,7 +1473,7 @@ const Slide18_RiskAcceptabilityMatrix = () => {
       </div>
 
       <InteractionHint>
-        <kbd>←</kbd> <kbd>→</kbd> Navigate
+        <kbd>R</kbd> Reset <span className="separator">•</span> Click cells to flip <span className="separator">•</span> Click factors to toggle <span className="separator">•</span> <kbd>←</kbd> <kbd>→</kbd> Navigate
       </InteractionHint>
 
       <Notes>
