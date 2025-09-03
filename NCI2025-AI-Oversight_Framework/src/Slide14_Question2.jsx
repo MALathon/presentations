@@ -197,7 +197,7 @@ const Slide12_Question2 = () => {
             <ExampleList>
               <ExampleItem $color="#4CAF50">Retrospective analysis only</ExampleItem>
               <ExampleItem $color="#4CAF50">Research insights for future care</ExampleItem>
-              <ExampleItem $color="#4CAF50">No real-time clinical influence</ExampleItem>
+              <ExampleItem $color="#4CAF50">No real-time clinical influence*</ExampleItem>
               <ExampleItem $color="#4CAF50">Results inform protocol development</ExampleItem>
               <ExampleItem $color="#4CAF50">Population-level studies only</ExampleItem>
             </ExampleList>
@@ -212,6 +212,11 @@ const Slide12_Question2 = () => {
           <ImplicationText>
             Direct patient impact requires enhanced safety monitoring, real-time performance tracking, 
             and fail-safe mechanisms. Indirect impact allows more flexibility in study design and timing.
+            <br/><br/>
+            <span style={{fontSize: '14px', fontStyle: 'italic', color: 'rgba(74, 226, 192, 0.8)'}}>
+              * Protocol must specify HOW no real-time influence is ensured (e.g., delayed analysis, 
+              results not in clinical records, research-only infrastructure)
+            </span>
           </ImplicationText>
         </ImplicationBox>
       </ContentContainer>

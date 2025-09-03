@@ -197,8 +197,8 @@ const SlideRegulatoryFramework = () => {
       { code: '21 CFR 820.30', desc: 'Design Controls - Standard V&V requirements now applied to AI models' },
       { code: '21 CFR 812', desc: 'IDE regulations - Clinical trial requirements now covering AI devices' },
       { code: '21 CFR 11', desc: 'Electronic records - Existing compliance rules for digital data' },
-      { code: 'FDA SaMD Guidance', desc: 'Software as Medical Device - Pre-AI framework being adapted' },
-      { code: '21st Century Cures Act', desc: 'Medical software provisions and real-world evidence' }
+      { code: 'ICH GCP E6(R3)', desc: 'Good Clinical Practice - International standards for trials' },
+      { code: 'FDA SaMD Guidance', desc: 'Software as Medical Device - Pre-AI framework being adapted' }
     ],
     iso: [
       { code: 'ISO 14971', desc: 'Risk management - Standard medical device risk framework' },
@@ -208,7 +208,7 @@ const SlideRegulatoryFramework = () => {
       { code: 'ISO/IEC 82304', desc: 'Health software - General software product requirements' }
     ],
     irb: [
-      { code: '45 CFR 46', desc: 'Common Rule - Human subjects protections from 1991' },
+      { code: '45 CFR 46', desc: 'Common Rule - Human subjects protections (revised 2018)' },
       { code: '21 CFR 50', desc: 'FDA human subjects - Standard informed consent requirements' },
       { code: '21 CFR 56', desc: 'IRB requirements - Traditional institutional review processes' },
       { code: '32 CFR 219', desc: 'DoD protections - Military-specific human subjects rules' },

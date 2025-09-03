@@ -477,6 +477,53 @@ const Slide19PracticalChecklist = () => {
   const [collapsedCharacteristics, setCollapsedCharacteristics] = useState({});
   const [showDisclaimer, setShowDisclaimer] = useState(true);
 
+  // Add keyboard handler with control key combinations to avoid interference with typing
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      // Check if we're on slide 19
+      const params = new URLSearchParams(window.location.search);
+      const slideIndex = params.get('slideIndex');
+      
+      // Only handle keys when we're on slide 19 (index 18)
+      if (slideIndex !== '18') return;
+      
+      // Don't trigger if user is typing in an input field
+      if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.tagName === 'SELECT') {
+        return;
+      }
+      
+      // Handle Ctrl+D or Cmd+D for disclaimer toggle
+      if ((event.ctrlKey || event.metaKey) && (event.key === 'd' || event.key === 'D')) {
+        event.preventDefault();
+        setShowDisclaimer(prev => !prev);
+      }
+      
+      // Handle Ctrl+R or Cmd+R for reset
+      if ((event.ctrlKey || event.metaKey) && (event.key === 'r' || event.key === 'R')) {
+        event.preventDefault();
+        // Reset all state
+        setTechType('ml');
+        setQ1Answer('');
+        setQ2Answers({});
+        setSelectedCharacteristics({});
+        setCharacteristicStatus({});
+        setSelectedControls({});
+        setCustomControls({});
+        setEvaluatingControls({});
+        setCustomEvaluatingControls({});
+        setNoRiskJustifications({});
+        setOversightLevel('minimal');
+        setInstitutionProfile('standard');
+        setCollapsedGroups({});
+        setCollapsedCharacteristics({});
+        setShowDisclaimer(true); // Keep disclaimer on after reset
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   // ROBUST QUANTITATIVE SCORING SYSTEM
   const getTechnologyCharacteristics = useMemo(() => () => {
     if (!techCategories[techType] || !q1Answer) return [];
@@ -1916,7 +1963,7 @@ const Slide19PracticalChecklist = () => {
       </ContentContainer>
 
       <InteractionHint>
-        <kbd>R</kbd> Reset <span className="separator">•</span> <kbd>D</kbd> Disclaimer <span className="separator">•</span> <kbd>←</kbd> <kbd>→</kbd> Navigate
+        <kbd>Ctrl</kbd>+<kbd>R</kbd> Reset <span className="separator">•</span> <kbd>Ctrl</kbd>+<kbd>D</kbd> Disclaimer <span className="separator">•</span> <kbd>←</kbd> <kbd>→</kbd> Navigate
       </InteractionHint>
 
       <Notes>

@@ -401,23 +401,14 @@ const StatLabel = styled.div`
   letter-spacing: 0.5px;
 `;
 
-// Badge animations
+// Badge animations - simplified for smoother performance
 const swishIn = keyframes`
   0% {
-    transform: translateX(-50px) rotate(-10deg) scale(0.8);
+    transform: translateY(20px) scale(0.9);
     opacity: 0;
   }
-  40% {
-    transform: translateX(10px) rotate(5deg) scale(1.05);
-  }
-  60% {
-    transform: translateX(-5px) rotate(-2deg) scale(0.98);
-  }
-  80% {
-    transform: translateX(2px) rotate(1deg) scale(1.01);
-  }
   100% {
-    transform: translateX(0) rotate(0deg) scale(1);
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
 `;
@@ -440,11 +431,12 @@ const BadgeSection = styled.div`
 
 const BadgeWrapper = styled.div`
   position: relative;
-  animation: ${props => props.$visible ? swishIn : 'none'} 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: ${props => props.$visible ? swishIn : 'none'} 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   animation-delay: ${props => props.$delay}s;
   animation-fill-mode: both;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
   transition: transform 0.3s ease;
+  will-change: transform, opacity;
   
   &:hover {
     transform: translateY(-5px) scale(1.05);
@@ -621,7 +613,7 @@ const Slide02Speaker = () => {
   }, []);
 
   const expertiseAreas = [
-    'AI/ML Medical Devices',
+    'Medical AI/ML',
     'FDA/CE Regulatory',
     'Diagnostic Biosensors',
     'Clinical Translation',

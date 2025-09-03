@@ -238,7 +238,8 @@ const Slide15TechRisksAndMitigations = () => {
       risks: [
         'Black box decision-making',
         'Hidden spurious correlations',
-        'Catastrophic forgetting'
+        'Catastrophic forgetting',
+        'Model drift over time'
       ],
       mitigations: [
         'Explainability approaches',

@@ -25,6 +25,56 @@ const subtleGlow = keyframes`
   }
 `;
 
+// Subtle bubble float animation
+const floatBubble = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.8);
+  }
+  20% {
+    opacity: 0.3;
+    transform: translateY(-100px) scale(1);
+  }
+  80% {
+    opacity: 0.3;
+    transform: translateY(-400px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-500px) scale(0.8);
+  }
+`;
+
+// Bubble component
+const BubbleContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+`;
+
+const Bubble = styled.div`
+  position: absolute;
+  width: ${props => props.$size}px;
+  height: ${props => props.$size}px;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(255, 255, 255, 0.4), 
+    rgba(255, 255, 255, 0.1)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  opacity: 0;
+  animation: ${floatBubble} ${props => props.$duration}s ease-in-out infinite;
+  animation-delay: ${props => props.$delay}s;
+  bottom: 0;
+  left: ${props => props.$left}%;
+  filter: blur(0.3px);
+`;
+
 // Neural network canvas - fixed implementation
 const NeuralCanvas = styled.canvas`
   position: absolute;
@@ -94,7 +144,7 @@ const Title = styled.h1`
     width: 100px;
     height: 3px;
     background: #00A3E0;
-    animation: ${fadeInUp} 1.2s ease-out;
+    opacity: 1;
   }
 `;
 
@@ -363,6 +413,20 @@ const Slide01_Title = () => {
       {/* Layer 1: Gradient background */}
       <GradientBackground />
       
+      {/* Layer 1.5: Subtle floating bubbles */}
+      <BubbleContainer>
+        {/* Generate floating bubbles - very transparent */}
+        {[...Array(8)].map((_, i) => (
+          <Bubble
+            key={i}
+            $size={8 + Math.random() * 20}
+            $left={10 + (i * 10) + Math.random() * 5}
+            $duration={15 + Math.random() * 10}
+            $delay={i * 2 + Math.random() * 2}
+          />
+        ))}
+      </BubbleContainer>
+      
       {/* Layer 2: Neural network */}
       <NeuralCanvas ref={canvasRef} />
       
@@ -379,7 +443,7 @@ const Slide01_Title = () => {
         <PresenterCard>
           <AuthorsLabel>Authors</AuthorsLabel>
           <PresentersWrapper>
-            <PresenterName $isSpeaker={true}>Mark Lifson, PhD</PresenterName>
+            <PresenterName $isSpeaker={true}>Mark Lifson</PresenterName>
             <PresenterName $isSpeaker={false}>Tamiko Eto</PresenterName>
           </PresentersWrapper>
         </PresenterCard>

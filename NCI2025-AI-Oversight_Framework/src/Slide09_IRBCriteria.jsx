@@ -533,6 +533,14 @@ const ResearchIcon = () => (
   </svg>
 );
 
+const HumanSubjectsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+    <circle cx="12" cy="7" r="4"/>
+    <path d="M12 14v7"/>
+  </svg>
+);
+
 const DeviceIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
@@ -586,10 +594,9 @@ const PrivacyIcon = () => (
 
 const VulnerableIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10"/>
-    <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
-    <line x1="9" y1="9" x2="9.01" y2="9"/>
-    <line x1="15" y1="9" x2="15.01" y2="9"/>
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+    <path d="M12 8v6"/>
+    <circle cx="12" cy="16" r="1"/>
   </svg>
 );
 
@@ -617,11 +624,11 @@ const SlideIRBCriteria = () => {
       // Use Tab for navigation, Enter for selection, numbers for direct access
       if (e.key === 'Tab' && !e.shiftKey) {
         e.preventDefault();
-        setSelectedCriterion(prev => (prev + 1) % 8);
+        setSelectedCriterion(prev => (prev + 1) % 9);
       } else if (e.key === 'Tab' && e.shiftKey) {
         e.preventDefault();
-        setSelectedCriterion(prev => (prev - 1 + 8) % 8);
-      } else if (e.key >= '1' && e.key <= '8') {
+        setSelectedCriterion(prev => (prev - 1 + 9) % 9);
+      } else if (e.key >= '1' && e.key <= '9') {
         e.preventDefault();
         setSelectedCriterion(parseInt(e.key) - 1);
       } else if (e.key === 'Escape') {
@@ -646,25 +653,8 @@ const SlideIRBCriteria = () => {
   const criteria = [
     {
       id: 0,
-      title: 'Is it Human Subjects Research?',
-      shortTitle: 'Human Subjects',
-      ref: '45 CFR 46.102',
-      desc: 'Systematic investigation involving living individuals or their identifiable private information',
-      ai: 'Whether the activity constitutes a systematic investigation designed to develop or contribute to generalizable knowledge per 45 CFR 46.102(l), including determination of whether machine learning model training on retrospective data constitutes human subjects research under the Common Rule.',
-      critical: true,
-      category: 'definition',
-      icon: ResearchIcon,
-      referenceSources: ['45CFR', 'Belmont'],
-      practicalQuestions: [
-        'Will your AI model learn from or be trained on patient data?',
-        'Could the AI output be traced back to specific individuals?',
-        'Are you testing the AI\'s performance on real patient cases?'
-      ]
-    },
-    {
-      id: 1,
-      title: 'Software as Medical Device?',
-      shortTitle: 'SaMD Status',
+      title: 'FDA-Regulated Device?',
+      shortTitle: 'FDA Device',
       ref: '21 CFR 812, 820',
       desc: 'Software intended for diagnosis, treatment, prevention, or mitigation of disease with quality system requirements',
       ai: 'Compliance with FDA Quality System Regulation (21 CFR 820) design controls, including verification and validation activities per 21 CFR 820.30(g), software validation per 21 CFR 820.70(i), and determination of significant risk vs non-significant risk device classification under 21 CFR 812.',
@@ -679,7 +669,41 @@ const SlideIRBCriteria = () => {
       ]
     },
     {
+      id: 1,
+      title: 'Is it Human Subjects?',
+      shortTitle: 'Human Subjects',
+      ref: '45 CFR 46.102(e)',
+      desc: 'Living individual about whom an investigator obtains data or biospecimens',
+      ai: 'Whether the activity involves living individuals about whom an investigator obtains data through intervention or interaction, or identifiable private information per 45 CFR 46.102(e).',
+      critical: true,
+      category: 'definition',
+      icon: HumanSubjectsIcon,
+      referenceSources: ['45CFR', 'Belmont'],
+      practicalQuestions: [
+        'Will your AI model learn from or be trained on patient data?',
+        'Could the AI output be traced back to specific individuals?',
+        'Are you using data from living individuals?'
+      ]
+    },
+    {
       id: 2,
+      title: 'Is it Research?',
+      shortTitle: 'Research',
+      ref: '45 CFR 46.102(l)',
+      desc: 'Systematic investigation designed to develop or contribute to generalizable knowledge',
+      ai: 'Whether the activity constitutes a systematic investigation designed to develop or contribute to generalizable knowledge per 45 CFR 46.102(l), including determination of whether machine learning model training constitutes research.',
+      critical: true,
+      category: 'definition',
+      icon: ResearchIcon,
+      referenceSources: ['45CFR', 'Belmont'],
+      practicalQuestions: [
+        'Are you testing hypotheses about AI performance?',
+        'Will findings be published or shared publicly?',
+        'Is this designed to develop generalizable knowledge?'
+      ]
+    },
+    {
+      id: 3,
       title: 'Risks Minimized & Reasonable?',
       shortTitle: 'Risk Assessment',
       ref: '45 CFR 46.111(a)',
@@ -696,7 +720,7 @@ const SlideIRBCriteria = () => {
       ]
     },
     {
-      id: 3,
+      id: 4,
       title: 'Equitable Subject Selection?',
       shortTitle: 'Equity',
       ref: '45 CFR 46.111(3)',
@@ -713,7 +737,7 @@ const SlideIRBCriteria = () => {
       ]
     },
     {
-      id: 4,
+      id: 5,
       title: 'Informed Consent Obtained?',
       shortTitle: 'Consent',
       ref: '45 CFR 46.111(4)',
@@ -730,7 +754,7 @@ const SlideIRBCriteria = () => {
       ]
     },
     {
-      id: 5,
+      id: 6,
       title: 'Data Monitoring Plan?',
       shortTitle: 'Monitoring',
       ref: '45 CFR 46.111(6)',
@@ -747,7 +771,7 @@ const SlideIRBCriteria = () => {
       ]
     },
     {
-      id: 6,
+      id: 7,
       title: 'Privacy & Confidentiality?',
       shortTitle: 'Privacy',
       ref: '45 CFR 46.111(7)',
@@ -764,7 +788,7 @@ const SlideIRBCriteria = () => {
       ]
     },
     {
-      id: 7,
+      id: 8,
       title: 'Vulnerable Populations?',
       shortTitle: 'Vulnerable Groups',
       ref: '45 CFR 46.111(b)',
@@ -783,8 +807,8 @@ const SlideIRBCriteria = () => {
   ];
   
   const categories = [
-    { id: 'all', label: 'All Criteria', count: 8 },
-    { id: 'definition', label: 'Research Definition', count: 2 },
+    { id: 'all', label: 'All Criteria', count: 9 },
+    { id: 'definition', label: 'Research Definition', count: 3 },
     { id: 'risk', label: 'Risk Management', count: 2 },
     { id: 'subject', label: 'Subject Protection', count: 4 }
   ];
@@ -804,7 +828,7 @@ const SlideIRBCriteria = () => {
   return (
     <SlideWrapper 
       slideNumber={9}
-      slideTitle="8 Criteria, 1 Review"
+      slideTitle="9 Criteria, 1 Review"
       totalSlides={20}
       background="radial-gradient(ellipse at center, #0066CC 0%, #003B71 70%, #001833 100%)"
     >
@@ -826,7 +850,7 @@ const SlideIRBCriteria = () => {
             <CriteriaWheel>
               <WheelContainer>
                 {criteria.map((criterion, idx) => {
-                  const pos = getNodePosition(idx, 8);
+                  const pos = getNodePosition(idx, 9);
                   const Icon = criterion.icon;
                   const isFiltered = category !== 'all' && criterion.category !== category;
                   return (
@@ -850,7 +874,7 @@ const SlideIRBCriteria = () => {
                   );
                 })}
                 <CenterHub>
-                  8 Review<br/>Criteria
+                  9 Review<br/>Criteria
                 </CenterHub>
               </WheelContainer>
             </CriteriaWheel>

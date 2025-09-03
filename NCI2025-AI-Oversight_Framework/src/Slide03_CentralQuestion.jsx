@@ -160,7 +160,7 @@ const Slide3 = () => {
   const concerns = [
     {
       text: "It feels like magic - we don't really understand what's happening inside",
-      x: 10,
+      x: 12,  // Moved slightly right to avoid edge cutoff
       y: 15
     },
     {

@@ -116,7 +116,7 @@ const Slide20_Conclusion = () => {
           </SummaryText>
           
           <KeyPoints>
-            <KeyPoint>Is this human subjects research requiring IRB review?</KeyPoint>
+            <KeyPoint>Is this human subjects research requiring IRB review? (Including FDA-regulated device studies)</KeyPoint>
             <KeyPoint>What is the potential for impact on human subjects?</KeyPoint>
             <KeyPoint>Is the technical risk acceptable relative to benefits?</KeyPoint>
           </KeyPoints>

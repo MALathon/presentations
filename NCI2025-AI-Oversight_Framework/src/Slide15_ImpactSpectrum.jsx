@@ -252,7 +252,7 @@ const Slide13_ImpactSpectrum = () => {
                 <strong>Example:</strong> {impact.example}
               </ImpactExample>
               <ImpactExample style={{marginTop: '12px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '10px'}}>
-                <strong style={{color: impact.level === 'low' ? '#4CAF50' : impact.level === 'moderate' ? '#FFC107' : '#F44336'}}>IRB Oversight:</strong> {impact.oversight}
+                <strong style={{color: impact.level === 'low' ? '#4CAF50' : impact.level === 'moderate' ? '#FFC107' : '#F44336'}}>IRB Oversight & Expectations:</strong> {impact.oversight}
               </ImpactExample>
             </ImpactCard>
           ))}
