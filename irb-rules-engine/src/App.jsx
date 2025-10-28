@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import TechnologyTypesManager from './components/TechnologyTypesManager';
 import CharacteristicManager from './components/CharacteristicManager';
 import GraphVisualizer from './components/GraphVisualizer';
 import ScoringRules from './components/ScoringRules';
@@ -96,16 +97,16 @@ function App() {
         </div>
         <Nav>
           <NavButton
+            $active={activeView === 'techtypes'}
+            onClick={() => setActiveView('techtypes')}
+          >
+            🔧 Technology Types
+          </NavButton>
+          <NavButton
             $active={activeView === 'characteristics'}
             onClick={() => setActiveView('characteristics')}
           >
-            📋 Characteristics & Controls
-          </NavButton>
-          <NavButton
-            $active={activeView === 'scoring'}
-            onClick={() => setActiveView('scoring')}
-          >
-            🎯 Scoring Rules
+            📋 Characteristics
           </NavButton>
           <NavButton
             $active={activeView === 'graph'}
@@ -113,18 +114,25 @@ function App() {
           >
             🕸️ Graph View
           </NavButton>
+          <NavButton
+            $active={activeView === 'scoring'}
+            onClick={() => setActiveView('scoring')}
+          >
+            🎯 Scoring Rules
+          </NavButton>
         </Nav>
       </Header>
 
       <InfoBanner>
         <span className="icon">💡</span>
         <div>
-          <strong>Getting Started:</strong> Define characteristics with their controls, then create scoring rules to determine when they're recommended.
-          All changes are saved locally in your browser.
+          <strong>New Graph-Based Architecture!</strong> Technology types are now configurable. Create custom tech domains, define characteristics,
+          and build complex interdependencies. View all relationships in the Graph tab.
         </div>
       </InfoBanner>
 
       <Content>
+        {activeView === 'techtypes' && <TechnologyTypesManager />}
         {activeView === 'characteristics' && <CharacteristicManager />}
         {activeView === 'scoring' && <ScoringRules />}
         {activeView === 'graph' && <GraphVisualizer />}
