@@ -1,5 +1,5 @@
 import React from 'react';
-import { Deck, Slide } from 'spectacle';
+import { Deck } from 'spectacle';
 import styled from 'styled-components';
 
 // Import slides
@@ -57,29 +57,6 @@ const GlobalStyle = styled.div`
   }
 `;
 
-// Clean wrapper component that filters Spectacle props from being passed to DOM
-const CleanSlideWrapper = ({ children, ...props }) => {
-  // Filter out Spectacle-specific props that shouldn't go to DOM
-  const {
-    textAlign,
-    padding,
-    margin,
-    backgroundColor,
-    backgroundImage,
-    backgroundOpacity,
-    backgroundPosition,
-    backgroundRepeat,
-    backgroundSize,
-    scaleRatio,
-    transition,
-    template,
-    slideNum,
-    numberOfSlides,
-    ...cleanProps
-  } = props;
-
-  return <Slide {...cleanProps}>{children}</Slide>;
-};
 
 /**
  * Core Training Workshop: Hands-On Core Training on Artificial Intelligence
@@ -117,41 +94,15 @@ const Presentation = () => {
           },
         }}
       >
-        <CleanSlideWrapper>
-          <Slide01_Title />
-        </CleanSlideWrapper>
-
-        <CleanSlideWrapper>
-          <Slide02_Speaker />
-        </CleanSlideWrapper>
-
-        <CleanSlideWrapper>
-          <Slide03_AIvsTraditional />
-        </CleanSlideWrapper>
-
-        <CleanSlideWrapper>
-          <Slide04_ClinicalPhases />
-        </CleanSlideWrapper>
-
-        <CleanSlideWrapper>
-          <Slide05_IRBCriteria />
-        </CleanSlideWrapper>
-
-        <CleanSlideWrapper>
-          <Slide06_TranslationGap />
-        </CleanSlideWrapper>
-
-        <CleanSlideWrapper>
-          <Slide07_LanguageMatters />
-        </CleanSlideWrapper>
-
-        <CleanSlideWrapper>
-          <Slide08_ImpactSpectrum />
-        </CleanSlideWrapper>
-
-        <CleanSlideWrapper>
-          <Slide09_RiskMatrix />
-        </CleanSlideWrapper>
+        <Slide01_Title />
+        <Slide02_Speaker />
+        <Slide03_AIvsTraditional />
+        <Slide04_ClinicalPhases />
+        <Slide05_IRBCriteria />
+        <Slide06_TranslationGap />
+        <Slide07_LanguageMatters />
+        <Slide08_ImpactSpectrum />
+        <Slide09_RiskMatrix />
       </Deck>
     </GlobalStyle>
   );
