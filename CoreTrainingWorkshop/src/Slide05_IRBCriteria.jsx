@@ -632,7 +632,6 @@ const Slide05_IRBCriteria = () => {
         // Reset to initial state
         setSelectedCriterion(0);
         setCategory('all');
-        setShowAll(false);
       }
     };
     
