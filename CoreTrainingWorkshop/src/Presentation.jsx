@@ -37,24 +37,9 @@ const theme = {
   space: [16, 24, 32, 48, 64],
 };
 
-// Global styles
-const GlobalStyle = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  .spectacle-presenter-mode {
-    background: #001833 !important;
-  }
-
-  /* Override Spectacle's default slide styles */
-  .spectacle-slide {
-    overflow: hidden;
-  }
+// Styled Deck - extends Deck directly instead of wrapping it
+const StyledDeck = styled(Deck)`
+  font-family: ${theme.fonts.text};
 `;
 
 
@@ -75,8 +60,8 @@ const GlobalStyle = styled.div`
  */
 const Presentation = () => {
   return (
-    <GlobalStyle>
-      <Deck
+    <>
+      <StyledDeck
         theme={theme}
         template={() => null}
         transition={{
@@ -103,8 +88,8 @@ const Presentation = () => {
         <Slide07_LanguageMatters />
         <Slide08_ImpactSpectrum />
         <Slide09_RiskMatrix />
-      </Deck>
-    </GlobalStyle>
+      </StyledDeck>
+    </>
   );
 };
 
