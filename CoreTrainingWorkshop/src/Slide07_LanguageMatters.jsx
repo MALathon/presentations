@@ -78,11 +78,11 @@ const Column = styled.div`
 const ColumnHeader = styled.div`
   background: ${props => props.$clinical ?
     'linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%)' :
-    'linear-gradient(135deg, rgba(96, 165, 250, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%)'
+    'linear-gradient(135deg, rgba(134, 239, 172, 0.2) 0%, rgba(74, 222, 128, 0.1) 100%)'
   };
   border: 2px solid ${props => props.$clinical ?
     'rgba(251, 191, 36, 0.5)' :
-    'rgba(96, 165, 250, 0.5)'
+    'rgba(134, 239, 172, 0.5)'
   };
   border-radius: 8px;
   padding: 8px 12px;
@@ -96,7 +96,7 @@ const ColumnHeader = styled.div`
 const ColumnTitle = styled.h2`
   font-size: 16px;
   font-weight: 600;
-  color: ${props => props.$clinical ? '#FBBF24' : '#60A5FA'};
+  color: ${props => props.$clinical ? '#FBBF24' : '#86EFAC'};
   margin: 0;
   display: flex;
   align-items: center;
@@ -118,13 +118,13 @@ const KeyWord = styled.span`
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid ${props => props.$clinical ?
     'rgba(251, 191, 36, 0.4)' :
-    'rgba(96, 165, 250, 0.4)'
+    'rgba(134, 239, 172, 0.4)'
   };
   border-radius: 4px;
   padding: 4px 10px;
   font-size: 14px;
   font-weight: 600;
-  color: ${props => props.$clinical ? '#FBBF24' : '#60A5FA'};
+  color: ${props => props.$clinical ? '#FBBF24' : '#86EFAC'};
   margin: 0 3px;
   display: inline-flex;
   align-items: center;
@@ -158,14 +158,14 @@ const ExampleCard = styled.div`
   background: ${props => props.$type === 'clinical' ?
     'rgba(251, 191, 36, 0.06)' :
     props.$type === 'ambiguous' ?
-    'rgba(45, 212, 191, 0.06)' :
-    'rgba(96, 165, 250, 0.06)'
+    'rgba(249, 168, 212, 0.06)' :
+    'rgba(134, 239, 172, 0.06)'
   };
   border-left: 3px solid ${props => props.$type === 'clinical' ?
     '#FBBF24' :
     props.$type === 'ambiguous' ?
-    '#2DD4BF' :
-    '#60A5FA'
+    '#F9A8D4' :
+    '#86EFAC'
   };
   border-radius: 6px;
   padding: 8px 14px;
@@ -204,8 +204,8 @@ const ExampleText = styled.p`
   }
 
   .highlight-exploratory {
-    background: rgba(96, 165, 250, 0.2);
-    color: #60A5FA;
+    background: rgba(134, 239, 172, 0.2);
+    color: #86EFAC;
     padding: 2px 6px;
     border-radius: 3px;
     font-weight: 600;
@@ -217,8 +217,8 @@ const ExampleText = styled.p`
   }
 
   .highlight-ambiguous {
-    background: rgba(45, 212, 191, 0.2);
-    color: #2DD4BF;
+    background: rgba(249, 168, 212, 0.2);
+    color: #F9A8D4;
     padding: 2px 6px;
     border-radius: 3px;
     font-weight: 600;
@@ -236,8 +236,8 @@ const ExampleLabel = styled.span`
   color: ${props => props.$type === 'clinical' ?
     '#FBBF24' :
     props.$type === 'ambiguous' ?
-    '#2DD4BF' :
-    '#60A5FA'
+    '#F9A8D4' :
+    '#86EFAC'
   };
   text-transform: uppercase;
   letter-spacing: 0.7px;

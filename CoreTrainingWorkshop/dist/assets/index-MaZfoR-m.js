@@ -2218,8 +2218,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   flex-direction: column;
   gap: 8px;
 `,bO=H.div`
-  background: ${e=>e.$clinical?"linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%)":"linear-gradient(135deg, rgba(96, 165, 250, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%)"};
-  border: 2px solid ${e=>e.$clinical?"rgba(251, 191, 36, 0.5)":"rgba(96, 165, 250, 0.5)"};
+  background: ${e=>e.$clinical?"linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%)":"linear-gradient(135deg, rgba(134, 239, 172, 0.2) 0%, rgba(74, 222, 128, 0.1) 100%)"};
+  border: 2px solid ${e=>e.$clinical?"rgba(251, 191, 36, 0.5)":"rgba(134, 239, 172, 0.5)"};
   border-radius: 8px;
   padding: 8px 12px;
   margin-bottom: 6px;
@@ -2230,7 +2230,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 `,vO=H.h2`
   font-size: 16px;
   font-weight: 600;
-  color: ${e=>e.$clinical?"#FBBF24":"#60A5FA"};
+  color: ${e=>e.$clinical?"#FBBF24":"#86EFAC"};
   margin: 0;
   display: flex;
   align-items: center;
@@ -2246,12 +2246,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   }
 `,yO=H.span`
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid ${e=>e.$clinical?"rgba(251, 191, 36, 0.4)":"rgba(96, 165, 250, 0.4)"};
+  border: 1px solid ${e=>e.$clinical?"rgba(251, 191, 36, 0.4)":"rgba(134, 239, 172, 0.4)"};
   border-radius: 4px;
   padding: 4px 10px;
   font-size: 14px;
   font-weight: 600;
-  color: ${e=>e.$clinical?"#FBBF24":"#60A5FA"};
+  color: ${e=>e.$clinical?"#FBBF24":"#86EFAC"};
   margin: 0 3px;
   display: inline-flex;
   align-items: center;
@@ -2278,8 +2278,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   display: grid;
   gap: 8px;
 `,kbe=H.div`
-  background: ${e=>e.$type==="clinical"?"rgba(251, 191, 36, 0.06)":e.$type==="ambiguous"?"rgba(45, 212, 191, 0.06)":"rgba(96, 165, 250, 0.06)"};
-  border-left: 3px solid ${e=>e.$type==="clinical"?"#FBBF24":e.$type==="ambiguous"?"#2DD4BF":"#60A5FA"};
+  background: ${e=>e.$type==="clinical"?"rgba(251, 191, 36, 0.06)":e.$type==="ambiguous"?"rgba(249, 168, 212, 0.06)":"rgba(134, 239, 172, 0.06)"};
+  border-left: 3px solid ${e=>e.$type==="clinical"?"#FBBF24":e.$type==="ambiguous"?"#F9A8D4":"#86EFAC"};
   border-radius: 6px;
   padding: 8px 14px;
   opacity: ${e=>e.$visible?1:0};
@@ -2313,8 +2313,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   }
 
   .highlight-exploratory {
-    background: rgba(96, 165, 250, 0.2);
-    color: #60A5FA;
+    background: rgba(134, 239, 172, 0.2);
+    color: #86EFAC;
     padding: 2px 6px;
     border-radius: 3px;
     font-weight: 600;
@@ -2326,8 +2326,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   }
 
   .highlight-ambiguous {
-    background: rgba(45, 212, 191, 0.2);
-    color: #2DD4BF;
+    background: rgba(249, 168, 212, 0.2);
+    color: #F9A8D4;
     padding: 2px 6px;
     border-radius: 3px;
     font-weight: 600;
@@ -2340,7 +2340,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 `,Rbe=H.span`
   font-size: 14px;
   font-weight: 600;
-  color: ${e=>e.$type==="clinical"?"#FBBF24":e.$type==="ambiguous"?"#2DD4BF":"#60A5FA"};
+  color: ${e=>e.$type==="clinical"?"#FBBF24":e.$type==="ambiguous"?"#F9A8D4":"#86EFAC"};
   text-transform: uppercase;
   letter-spacing: 0.7px;
   display: inline-flex;
