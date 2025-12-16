@@ -614,13 +614,6 @@ const Slide05_IRBCriteria = () => {
     }, 300);
     
     const handleKeyPress = (e) => {
-      // Check if we're on slide 9
-      const params = new URLSearchParams(window.location.search);
-      const slideIndex = params.get('slideIndex');
-      
-      // Only handle keys when we're on slide 9 (index 8)
-      if (slideIndex !== '4') return;
-      
       // Use Tab for navigation, Enter for selection, numbers for direct access
       if (e.key === 'Tab' && !e.shiftKey) {
         e.preventDefault();
