@@ -44,20 +44,21 @@ const TitleContainer = styled.div`
   justify-content: center;
   height: 100%;
   text-align: center;
-  padding: 40px;
+  padding: 20px 40px;
+  gap: 0;
 `;
 
 const WorkshopBadge = styled.div`
   background: linear-gradient(135deg, rgba(74, 226, 192, 0.2) 0%, rgba(74, 226, 192, 0.1) 100%);
   border: 2px solid rgba(74, 226, 192, 0.4);
   border-radius: 30px;
-  padding: 10px 30px;
-  font-size: 16px;
+  padding: 8px 25px;
+  font-size: 14px;
   font-weight: 600;
   color: #4AE2C0;
   letter-spacing: 3px;
   text-transform: uppercase;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
   animation: ${fadeIn} 0.8s ease-out;
 `;
 
@@ -81,20 +82,20 @@ const MainTitle = styled.h1`
 `;
 
 const Subtitle = styled.h2`
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.85);
-  margin: 0 0 60px 0;
+  margin: 0 0 30px 0;
   max-width: 800px;
   line-height: 1.4;
   animation: ${fadeIn} 1s ease-out 0.4s both;
 `;
 
 const Divider = styled.div`
-  width: 120px;
-  height: 3px;
+  width: 100px;
+  height: 2px;
   background: linear-gradient(90deg, transparent, #4AE2C0, transparent);
-  margin: 0 0 40px 0;
+  margin: 0 0 25px 0;
   animation: ${fadeIn} 1s ease-out 0.5s both;
 `;
 
@@ -116,8 +117,8 @@ const PresenterTitle = styled.div`
 `;
 
 const EventInfo = styled.div`
-  margin-top: 50px;
-  padding: 20px 40px;
+  margin-top: 25px;
+  padding: 15px 35px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -138,8 +139,8 @@ const DateText = styled.div`
 
 const TopicHighlights = styled.div`
   display: flex;
-  gap: 15px;
-  margin-top: 40px;
+  gap: 12px;
+  margin-top: 20px;
   flex-wrap: wrap;
   justify-content: center;
   animation: ${fadeIn} 1s ease-out 1s both;
