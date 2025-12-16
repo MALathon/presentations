@@ -21,7 +21,7 @@ const ContentContainer = styled.div`
 const Subtitle = styled.h2`
   font-size: 18px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.7);
+  color: #E0E0E0;
   text-align: center;
   margin: 0 0 5px 0;
   letter-spacing: 0.5px;
@@ -29,6 +29,12 @@ const Subtitle = styled.h2`
   transform: translateY(${props => props.$visible ? 0 : '20px'});
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   transition-delay: 0.2s;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
 `;
 
 const KeyWordsSection = styled.div`
@@ -72,11 +78,11 @@ const Column = styled.div`
 const ColumnHeader = styled.div`
   background: ${props => props.$clinical ?
     'linear-gradient(135deg, rgba(255, 67, 67, 0.2) 0%, rgba(200, 34, 34, 0.1) 100%)' :
-    'linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(46, 125, 50, 0.1) 100%)'
+    'linear-gradient(135deg, rgba(33, 150, 243, 0.2) 0%, rgba(25, 118, 210, 0.1) 100%)'
   };
   border: 2px solid ${props => props.$clinical ?
     'rgba(255, 67, 67, 0.5)' :
-    'rgba(76, 175, 80, 0.5)'
+    'rgba(33, 150, 243, 0.5)'
   };
   border-radius: 8px;
   padding: 8px 12px;
@@ -90,7 +96,7 @@ const ColumnHeader = styled.div`
 const ColumnTitle = styled.h2`
   font-size: 16px;
   font-weight: 600;
-  color: ${props => props.$clinical ? '#FF6B6B' : '#4CAF50'};
+  color: ${props => props.$clinical ? '#FF6B6B' : '#64B5F6'};
   margin: 0;
   display: flex;
   align-items: center;
@@ -109,22 +115,35 @@ const fadeInScale = keyframes`
 `;
 
 const KeyWord = styled.span`
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid ${props => props.$clinical ?
-    'rgba(255, 67, 67, 0.3)' :
-    'rgba(76, 175, 80, 0.3)'
+    'rgba(255, 67, 67, 0.4)' :
+    'rgba(33, 150, 243, 0.4)'
   };
   border-radius: 4px;
-  padding: 3px 8px;
-  font-size: 12px;
+  padding: 4px 10px;
+  font-size: 14px;
   font-weight: 600;
-  color: ${props => props.$clinical ? '#FF6B6B' : '#4CAF50'};
+  color: ${props => props.$clinical ? '#FF6B6B' : '#64B5F6'};
   margin: 0 3px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   opacity: ${props => props.$visible ? 1 : 0};
   animation: ${props => props.$visible && css`
     ${fadeInScale} 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${props.$delay}s both
   `};
+
+  /* Add small icon indicator for colorblind accessibility */
+  &::before {
+    content: ${props => props.$clinical ? '"⚠"' : '"✓"'};
+    font-size: 12px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+  }
 `;
 
 const ExamplesSection = styled.div`
@@ -139,14 +158,14 @@ const ExampleCard = styled.div`
   background: ${props => props.$type === 'clinical' ?
     'rgba(255, 67, 67, 0.06)' :
     props.$type === 'ambiguous' ?
-    'rgba(255, 193, 7, 0.06)' :
-    'rgba(76, 175, 80, 0.06)'
+    'rgba(156, 39, 176, 0.06)' :
+    'rgba(33, 150, 243, 0.06)'
   };
   border-left: 3px solid ${props => props.$type === 'clinical' ?
     '#FF6B6B' :
     props.$type === 'ambiguous' ?
-    '#FFC107' :
-    '#4CAF50'
+    '#AB47BC' :
+    '#64B5F6'
   };
   border-radius: 6px;
   padding: 8px 14px;
@@ -157,17 +176,17 @@ const ExampleCard = styled.div`
 `;
 
 const SectionHeader = styled.div`
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: #C7C7C7;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   margin-bottom: 2px;
 `;
 
 const ExampleText = styled.p`
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  color: #FFFFFF;
   margin: 0 0 3px 0;
   line-height: 1.35;
 
@@ -177,37 +196,60 @@ const ExampleText = styled.p`
     padding: 2px 6px;
     border-radius: 3px;
     font-weight: 600;
+    /* Add icon prefix for accessibility */
+    &::before {
+      content: '⚠ ';
+      font-size: 12px;
+    }
   }
 
   .highlight-exploratory {
-    background: rgba(76, 175, 80, 0.2);
-    color: #4CAF50;
+    background: rgba(33, 150, 243, 0.2);
+    color: #64B5F6;
     padding: 2px 6px;
     border-radius: 3px;
     font-weight: 600;
+    /* Add icon prefix for accessibility */
+    &::before {
+      content: '✓ ';
+      font-size: 12px;
+    }
   }
 
   .highlight-ambiguous {
-    background: rgba(255, 193, 7, 0.2);
-    color: #FFC107;
+    background: rgba(156, 39, 176, 0.2);
+    color: #CE93D8;
     padding: 2px 6px;
     border-radius: 3px;
     font-weight: 600;
+    /* Add icon prefix for accessibility */
+    &::before {
+      content: '? ';
+      font-size: 12px;
+    }
   }
 `;
 
 const ExampleLabel = styled.span`
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 600;
   color: ${props => props.$type === 'clinical' ?
     '#FF6B6B' :
     props.$type === 'ambiguous' ?
-    '#FFC107' :
-    '#4CAF50'
+    '#CE93D8' :
+    '#64B5F6'
   };
   text-transform: uppercase;
   letter-spacing: 0.7px;
-  opacity: 0.8;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  /* Add icon prefix based on type */
+  &::before {
+    content: ${props => props.$type === 'clinical' ? '"⚠"' :
+      props.$type === 'ambiguous' ? '"?"' : '"✓"'};
+  }
 `;
 
 const WarningIcon = () => (

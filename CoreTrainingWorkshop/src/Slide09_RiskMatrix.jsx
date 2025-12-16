@@ -58,7 +58,7 @@ const AxisLabel = styled.div`
   justify-content: center;
   font-size: 14px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: #FFFFFF;
   text-align: center;
   padding: 10px;
 
@@ -83,6 +83,11 @@ const RiskCellContainer = styled.div`
   opacity: ${props => props.$visible ? 1 : 0};
   animation: ${props => props.$visible && css`${fadeIn} 0.5s ease-out`};
   animation-delay: ${props => props.$delay || '0s'};
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+  }
 `;
 
 const RiskCell = styled.div`
@@ -94,6 +99,10 @@ const RiskCell = styled.div`
   transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
   transform: ${props => props.$flipped ? 'rotateY(180deg)' : 'rotateY(0)'};
   cursor: ${props => props.$canFlip ? 'pointer' : 'default'};
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `;
 
 const CardFace = styled.div`
@@ -117,6 +126,28 @@ const CardFace = styled.div`
     if (risk <= 5) return 'linear-gradient(135deg, #FF5722, #FF7043)';
     return 'linear-gradient(135deg, #F44336, #EF5350)';
   }};
+
+  /* Pattern overlay for accessibility - different patterns per risk level */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    border-radius: 8px;
+    opacity: 0.15;
+    background: ${props => {
+      const risk = props.$riskLevel;
+      if (risk <= 1) return 'none'; /* Solid for low */
+      if (risk <= 2) return 'repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(255,255,255,0.3) 8px, rgba(255,255,255,0.3) 10px)'; /* Horizontal lines */
+      if (risk <= 3) return 'repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(255,255,255,0.3) 6px, rgba(255,255,255,0.3) 8px)'; /* Diagonal lines */
+      if (risk <= 4) return 'repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(255,255,255,0.3) 6px, rgba(255,255,255,0.3) 8px)'; /* Vertical lines */
+      if (risk <= 5) return 'repeating-linear-gradient(-45deg, transparent, transparent 4px, rgba(255,255,255,0.4) 4px, rgba(255,255,255,0.4) 6px)'; /* Dense diagonal */
+      return 'repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255,255,255,0.4) 3px, rgba(255,255,255,0.4) 5px), repeating-linear-gradient(-45deg, transparent, transparent 3px, rgba(255,255,255,0.4) 3px, rgba(255,255,255,0.4) 5px)'; /* Cross-hatch for critical */
+    }};
+  }
 
   &.front {
     z-index: 2;
@@ -164,7 +195,7 @@ const ControlBadge = styled.div`
   color: white;
   padding: 4px 10px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   margin-top: 8px;
   gap: 6px;
@@ -176,8 +207,7 @@ const ControlBadge = styled.div`
   }
 
   .label {
-    font-size: 11px;
-    opacity: 0.9;
+    font-size: 14px;
   }
 `;
 
@@ -194,7 +224,7 @@ const MitigationItem = styled.div`
   background: rgba(0, 0, 0, 0.3);
   padding: 4px 6px;
   border-radius: 4px;
-  font-size: 10px;
+  font-size: 12px;
   color: white;
   display: flex;
   align-items: flex-start;
@@ -202,15 +232,15 @@ const MitigationItem = styled.div`
   line-height: 1.3;
 
   .check {
-    color: rgba(255, 255, 255, 0.8);
+    color: #E0E0E0;
     flex-shrink: 0;
     font-weight: bold;
-    font-size: 9px;
+    font-size: 12px;
   }
 `;
 
 const BackTitle = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: white;
   margin-bottom: 8px;
@@ -227,7 +257,7 @@ const OversightBadge = styled.div`
   color: white;
   padding: 3px 8px;
   border-radius: 10px;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   white-space: nowrap;
   z-index: 10;
@@ -235,14 +265,20 @@ const OversightBadge = styled.div`
 
 const Q3Panel = styled.div`
   width: 380px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
   border-radius: 12px;
   padding: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   opacity: ${props => props.$visible ? 1 : 0};
   transform: translateX(${props => props.$visible ? 0 : '20px'});
   transition: all 0.5s ease;
   align-self: center;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
 `;
 
 const PanelTitle = styled.h3`
@@ -265,8 +301,8 @@ const Q3Badge = styled.span`
 `;
 
 const PanelSubtitle = styled.div`
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  color: #E0E0E0;
   margin-bottom: 15px;
   line-height: 1.4;
 `;
@@ -343,15 +379,15 @@ const FactorContent = styled.div`
 `;
 
 const FactorTitle = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  color: ${props => props.$present ? '#FFC107' : 'rgba(255, 255, 255, 0.8)'};
+  color: ${props => props.$present ? '#FFC107' : '#E0E0E0'};
   line-height: 1.2;
 `;
 
 const FactorDesc = styled.div`
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  color: #C7C7C7;
   line-height: 1.2;
   margin-top: 2px;
 `;
@@ -385,8 +421,8 @@ const TotalScore = styled.div`
   align-items: center;
 
   .label {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    color: #E0E0E0;
   }
 
   .score {
@@ -498,7 +534,7 @@ const Slide09_RiskMatrix = () => {
               transform: 'translateY(-50%) rotate(-90deg)',
               fontSize: '16px',
               fontWeight: '600',
-              color: 'rgba(255, 255, 255, 0.9)',
+              color: '#FFFFFF',
               whiteSpace: 'nowrap',
               width: '200px',
               textAlign: 'center'
@@ -506,13 +542,13 @@ const Slide09_RiskMatrix = () => {
               Q2: Patient Impact
             </div>
             <MatrixGrid>
-              <div style={{ gridRow: '1', gridColumn: '1', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '600', color: 'rgba(255, 255, 255, 0.9)', background: 'rgba(0, 0, 0, 0.3)', borderRadius: '8px 0 0 0', padding: '8px', writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+              <div style={{ gridRow: '1', gridColumn: '1', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: '600', color: '#FFFFFF', background: 'rgba(0, 0, 0, 0.3)', borderRadius: '8px 0 0 0', padding: '8px', writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
                 Direct Care
               </div>
-              <div style={{ gridRow: '2', gridColumn: '1', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '600', color: 'rgba(255, 255, 255, 0.9)', background: 'rgba(0, 0, 0, 0.3)', padding: '8px', writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+              <div style={{ gridRow: '2', gridColumn: '1', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: '600', color: '#FFFFFF', background: 'rgba(0, 0, 0, 0.3)', padding: '8px', writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
                 Indirect
               </div>
-              <div style={{ gridRow: '3', gridColumn: '1', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '600', color: 'rgba(255, 255, 255, 0.9)', background: 'rgba(0, 0, 0, 0.3)', borderRadius: '0 0 0 8px', padding: '8px', writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+              <div style={{ gridRow: '3', gridColumn: '1', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: '600', color: '#FFFFFF', background: 'rgba(0, 0, 0, 0.3)', borderRadius: '0 0 0 8px', padding: '8px', writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
                 No Impact
               </div>
 
@@ -537,7 +573,7 @@ const Slide09_RiskMatrix = () => {
                         <CellContent>
                           <RiskLabel>{cell.label} Risk</RiskLabel>
                           <RiskDetails>
-                            <div style={{ fontSize: '11px', color: 'white', lineHeight: '1.3', textShadow: '0 1px 2px rgba(0, 0, 0, 0.4)', fontWeight: '500' }}>
+                            <div style={{ fontSize: '14px', color: 'white', lineHeight: '1.3', textShadow: '0 1px 2px rgba(0, 0, 0, 0.4)', fontWeight: '500' }}>
                               {cell.details}
                             </div>
                             {hasControls && (
@@ -547,7 +583,7 @@ const Slide09_RiskMatrix = () => {
                               </ControlBadge>
                             )}
                             {hasControls && (
-                              <div style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.7)', marginTop: '6px', fontStyle: 'italic' }}>
+                              <div style={{ fontSize: '12px', color: '#E0E0E0', marginTop: '6px', fontStyle: 'italic' }}>
                                 Click to flip
                               </div>
                             )}
@@ -577,7 +613,7 @@ const Slide09_RiskMatrix = () => {
               <AxisLabel className="x-axis" style={{gridRow: '4', gridColumn: '4'}}>Clinical</AxisLabel>
             </MatrixGrid>
 
-            <div style={{textAlign: 'center', marginTop: '15px', fontSize: '16px', color: 'rgba(255, 255, 255, 0.9)', fontWeight: '600'}}>
+            <div style={{textAlign: 'center', marginTop: '15px', fontSize: '16px', color: '#FFFFFF', fontWeight: '600'}}>
               Q1: Clinical Intent
             </div>
           </MatrixSection>
@@ -643,8 +679,8 @@ const Slide09_RiskMatrix = () => {
         position: 'absolute',
         bottom: '70px',
         right: '40px',
-        fontSize: '11px',
-        color: 'rgba(255, 255, 255, 0.5)',
+        fontSize: '14px',
+        color: '#C7C7C7',
         fontStyle: 'italic'
       }}>
         Based on ISO 14971 Risk Management

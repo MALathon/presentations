@@ -71,6 +71,11 @@ const Title = styled.h1`
   letter-spacing: -1px;
   opacity: 0;
   animation: ${titleAnimation} 0.8s ease-out forwards;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+  }
 `;
 
 const GapContainer = styled.div`
@@ -92,6 +97,11 @@ const SideContent = styled.div`
   animation: ${props => props.$visible ? (props.$left ? slideLeft : slideRight) : 'none'} 0.8s ease-out;
   animation-delay: ${props => props.$delay || '0s'};
   animation-fill-mode: both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+  }
 `;
 
 const SideLabel = styled.div`
@@ -113,8 +123,8 @@ const SideTitle = styled.h2`
 
 const LanguageBlock = styled.div`
   background: ${props => props.$left ?
-    'linear-gradient(135deg, rgba(74, 226, 192, 0.03) 0%, rgba(74, 226, 192, 0.01) 100%)' :
-    'linear-gradient(135deg, rgba(139, 69, 255, 0.03) 0%, rgba(139, 69, 255, 0.01) 100%)'};
+    'linear-gradient(135deg, rgba(74, 226, 192, 0.08) 0%, rgba(74, 226, 192, 0.04) 100%)' :
+    'linear-gradient(135deg, rgba(139, 69, 255, 0.08) 0%, rgba(139, 69, 255, 0.04) 100%)'};
   border-left: 3px solid ${props => props.$left ? '#4AE2C0' : '#8B45FF'};
   padding: 15px 20px;
   border-radius: 4px;
@@ -122,11 +132,17 @@ const LanguageBlock = styled.div`
   transform: translateY(${props => props.$visible ? 0 : '10px'});
   transition: all 0.4s ease-out;
   transition-delay: ${props => props.$delay || '0s'};
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
 `;
 
 const LanguageText = styled.p`
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.85);
+  color: #FFFFFF;
   line-height: 1.6;
   margin: 0;
   font-family: ${props => props.$mono ?
@@ -148,6 +164,11 @@ const CenterGap = styled.div`
   opacity: ${props => props.$visible ? 1 : 0};
   transition: opacity 0.8s ease-out;
   transition-delay: 0.8s;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    opacity: 1;
+  }
 `;
 
 const GapVisual = styled.div`
@@ -190,7 +211,7 @@ const GapLabel = styled.div`
   padding: 8px 16px;
   border-radius: 20px;
   border: 2px solid #FF6B6B;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: #FF6B6B;
   letter-spacing: 1px;
@@ -205,11 +226,17 @@ const BottomInsight = styled.div`
   transform: scale(${props => props.$visible ? 1 : 0.95});
   transition: all 0.6s ease-out;
   transition-delay: 1s;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
 `;
 
 const InsightText = styled.p`
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.9);
+  color: #FFFFFF;
   line-height: 1.5;
   margin: 0;
 

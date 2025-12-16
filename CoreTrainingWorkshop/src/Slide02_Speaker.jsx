@@ -116,7 +116,7 @@ const Title = styled.h2`
 
 const Organization = styled.p`
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #E0E0E0;
   margin: 0;
 `;
 
@@ -143,7 +143,7 @@ const ExpertiseSection = styled.div`
 const SectionTitle = styled.h3`
   font-size: 14px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
+  color: #C7C7C7;
   text-transform: uppercase;
   letter-spacing: 1.2px;
   margin: 0 0 12px 0;
@@ -160,12 +160,12 @@ const ExpertiseGrid = styled.div`
 `;
 
 const ExpertiseItem = styled.div`
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   padding: 12px 14px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  color: #FFFFFF;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   text-align: center;
@@ -173,11 +173,18 @@ const ExpertiseItem = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 44px;
-  
+
   &:hover {
-    background: rgba(74, 226, 192, 0.1);
-    border-color: rgba(74, 226, 192, 0.3);
+    background: rgba(74, 226, 192, 0.15);
+    border-color: rgba(74, 226, 192, 0.4);
     transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    &:hover {
+      transform: none;
+    }
   }
 `;
 
@@ -226,14 +233,14 @@ const CompanyName = styled.div`
 `;
 
 const RoleText = styled.div`
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  color: #E0E0E0;
   margin-bottom: 4px;
 `;
 
 const HighlightText = styled.div`
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  color: #C7C7C7;
   line-height: 1.4;
 `;
 
@@ -262,9 +269,9 @@ const PersonalContent = styled.div`
 `;
 
 const PersonalTitle = styled.h3`
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: #C7C7C7;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin: 0 0 12px 0;
@@ -285,8 +292,8 @@ const PersonalItem = styled.div`
 `;
 
 const PersonalLabel = styled.div`
-  font-size: 10px;
-  color: rgba(74, 226, 192, 0.7);
+  font-size: 14px;
+  color: #4AE2C0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 2px;
@@ -305,23 +312,32 @@ const PersonalIcon = styled.div`
 `;
 
 const PersonalText = styled.div`
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  color: #FFFFFF;
   line-height: 1.3;
 `;
 
 const ContentToggle = styled.div`
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   text-align: center;
-  font-size: 11px;
-  color: rgba(74, 226, 192, 0.6);
+  font-size: 14px;
+  color: #4AE2C0;
   cursor: pointer;
   transition: color 0.3s ease;
-  
+
   &:hover {
-    color: rgba(74, 226, 192, 0.9);
+    color: #6EECD5;
+  }
+
+  &:focus-visible {
+    outline: 3px solid #4AE2C0;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 `;
 
@@ -345,15 +361,15 @@ const PublicationItem = styled.div`
 `;
 
 const PubTitle = styled.div`
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  color: #FFFFFF;
   line-height: 1.4;
   margin-bottom: 3px;
 `;
 
 const PubJournal = styled.div`
-  font-size: 10px;
-  color: rgba(74, 226, 192, 0.7);
+  font-size: 14px;
+  color: #4AE2C0;
   font-style: italic;
 `;
 
@@ -395,8 +411,8 @@ const StatValue = styled.div`
 `;
 
 const StatLabel = styled.div`
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  color: #E0E0E0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 `;
@@ -558,10 +574,10 @@ const BadgeRibbon = styled.div`
 
 const BadgeText = styled.div`
   position: relative;
-  font-size: 7px;
+  font-size: 10px;
   color: white;
   text-transform: uppercase;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.3px;
   font-weight: 700;
   z-index: 30;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);

@@ -84,11 +84,16 @@ const MainTitle = styled.h1`
 const Subtitle = styled.h2`
   font-size: 24px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.85);
+  color: #FFFFFF;
   margin: 0 0 30px 0;
   max-width: 800px;
   line-height: 1.4;
   animation: ${fadeIn} 1s ease-out 0.4s both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+  }
 `;
 
 const Divider = styled.div`
@@ -112,7 +117,7 @@ const PresenterName = styled.div`
 
 const PresenterTitle = styled.div`
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.7);
+  color: #E0E0E0;
   margin-bottom: 4px;
 `;
 
@@ -133,7 +138,7 @@ const EventText = styled.div`
 
 const DateText = styled.div`
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: #C7C7C7;
   margin-top: 8px;
 `;
 
@@ -147,12 +152,12 @@ const TopicHighlights = styled.div`
 `;
 
 const TopicTag = styled.div`
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   padding: 8px 20px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  color: #F5F5F5;
   font-weight: 500;
 `;
 

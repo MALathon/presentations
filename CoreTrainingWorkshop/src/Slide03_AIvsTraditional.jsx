@@ -67,6 +67,33 @@ const PathHeader = styled.div`
   animation: ${props => props.$visible && css`
     ${fadeIn} 0.6s ease-out ${props.$delay}s both
   `};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+  }
+`;
+
+// Icon for path headers - distinguishes AI from Traditional beyond color
+const PathIcon = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: ${props => props.$isAI ? '8px' : '50%'};
+  background: ${props => props.$isAI ? 'rgba(255, 107, 107, 0.2)' : 'rgba(102, 187, 106, 0.2)'};
+  border: 2px solid ${props => props.$isAI ? '#FF6B6B' : '#66BB6A'};
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: ${props => props.$isAI ? '#FF6B6B' : '#66BB6A'};
+  }
 `;
 
 const StepsRow = styled.div`
@@ -166,8 +193,8 @@ const StepText = styled.div`
   font-size: 15px;
   color: ${props => {
     if (props.$isQuestion) return '#FFC107';
-    if (props.$highlight) return 'rgba(255, 255, 255, 0.95)';
-    return 'rgba(255, 255, 255, 0.7)';
+    if (props.$highlight) return '#FFFFFF';
+    return '#E0E0E0';
   }};
   text-align: center;
   font-weight: ${props => props.$highlight ? '500' : '400'};
@@ -185,18 +212,23 @@ const VSBadge = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #FFFFFF;
   opacity: ${props => props.$visible ? 1 : 0};
   transition: opacity 0.5s ease 0.5s;
   z-index: 10;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    opacity: 1;
+  }
 `;
 
 const KeyInsight = styled.div`
@@ -256,6 +288,11 @@ const Slide03_AIvsTraditional = () => {
         <ComparisonContainer>
           <PathSection>
             <PathHeader $visible={true} $delay={0}>
+              <PathIcon>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </PathIcon>
               Traditional Research
             </PathHeader>
             <StepsRow>
@@ -283,6 +320,11 @@ const Slide03_AIvsTraditional = () => {
 
           <PathSection>
             <PathHeader $isAI $visible={true} $delay={0.3}>
+              <PathIcon $isAI>
+                <svg viewBox="0 0 24 24">
+                  <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                </svg>
+              </PathIcon>
               AI Research
             </PathHeader>
             <StepsRow>

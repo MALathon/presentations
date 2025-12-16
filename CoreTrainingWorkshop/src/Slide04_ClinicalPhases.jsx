@@ -83,19 +83,57 @@ const PhaseHeader = styled.div`
   text-align: center;
   margin-bottom: 15px;
   padding-bottom: 10px;
+  padding-top: 25px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+`;
+
+// Phase badge for accessibility - provides number identification beyond color
+const PhaseBadge = styled.div`
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: ${props => {
+    switch(props.$phase) {
+      case 1: return '50%';      // Circle for Phase 1
+      case 2: return '8px';      // Rounded square for Phase 2
+      case 3: return '0';        // Square with clip-path hexagon for Phase 3
+      default: return '50%';
+    }
+  }};
+  clip-path: ${props => props.$phase === 3 ?
+    'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' :
+    'none'};
+  background: ${props => {
+    switch(props.$phase) {
+      case 1: return '#4AE2C0';
+      case 2: return '#FFA500';
+      case 3: return '#FF6B6B';
+      default: return '#4AE2C0';
+    }
+  }};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #001833;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 `;
 
 const PhaseTitle = styled.h3`
   font-size: 16px;
   color: white;
-  margin: 8px 0 4px 0;
+  margin: 0 0 4px 0;
   font-weight: 600;
 `;
 
 const PhaseSubtitle = styled.div`
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  color: #E0E0E0;
   font-style: italic;
 `;
 
@@ -106,14 +144,21 @@ const PhaseContent = styled.div`
 `;
 
 const PhaseItem = styled.div`
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.85);
-  padding-left: 12px;
+  font-size: 14px;
+  color: #FFFFFF;
+  padding-left: 16px;
   position: relative;
   line-height: 1.4;
 
   &:before {
-    content: '-';
+    content: ${props => {
+      switch(props.$phase) {
+        case 1: return '"○"';  // Circle bullet for Phase 1
+        case 2: return '"□"';  // Square bullet for Phase 2
+        case 3: return '"◇"';  // Diamond bullet for Phase 3
+        default: return '"-"';
+      }
+    }};
     position: absolute;
     left: 0;
     color: ${props => {
@@ -121,7 +166,7 @@ const PhaseItem = styled.div`
         case 1: return '#4AE2C0';
         case 2: return '#FFA500';
         case 3: return '#FF6B6B';
-        default: return 'rgba(255, 255, 255, 0.5)';
+        default: return '#C7C7C7';
       }
     }};
   }
@@ -150,15 +195,15 @@ const ValidationBox = styled.div`
 `;
 
 const ValidationTitle = styled.div`
-  font-size: 13px;
+  font-size: 14px;
   color: #4AE2C0;
   font-weight: 600;
   margin-bottom: 5px;
 `;
 
 const ValidationText = styled.div`
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  color: #E0E0E0;
 `;
 
 const KeyInsight = styled.div`
@@ -207,6 +252,7 @@ const Slide04_ClinicalPhases = () => {
         <PhasesContainer>
           <PhaseCard $phase={1} $show={true}>
             <PhaseHeader>
+              <PhaseBadge $phase={1}>P1</PhaseBadge>
               <PhaseTitle>Exploratory/Discovery</PhaseTitle>
               <PhaseSubtitle>Pre-clinical</PhaseSubtitle>
             </PhaseHeader>
@@ -221,6 +267,7 @@ const Slide04_ClinicalPhases = () => {
 
           <PhaseCard $phase={2} $show={true} $delay="0.2s">
             <PhaseHeader>
+              <PhaseBadge $phase={2}>P2</PhaseBadge>
               <PhaseTitle>Pilot/Validation</PhaseTitle>
               <PhaseSubtitle>Early feasibility</PhaseSubtitle>
             </PhaseHeader>
@@ -235,6 +282,7 @@ const Slide04_ClinicalPhases = () => {
 
           <PhaseCard $phase={3} $show={true} $delay="0.4s">
             <PhaseHeader>
+              <PhaseBadge $phase={3}>P3</PhaseBadge>
               <PhaseTitle>Intervention/Treatment</PhaseTitle>
               <PhaseSubtitle>Clinical efficacy</PhaseSubtitle>
             </PhaseHeader>

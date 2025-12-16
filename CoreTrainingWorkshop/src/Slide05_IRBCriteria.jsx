@@ -136,61 +136,92 @@ const WheelContainer = styled.div`
   position: relative;
   width: 380px;
   height: 380px;
+  overflow: visible;
 `;
 
 const CriterionNode = styled.div`
   position: absolute;
-  width: ${props => props.$critical ? '58px' : '55px'};
-  height: ${props => props.$critical ? '58px' : '55px'};
-  background: ${props => props.$critical ? 
-    'linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%)' : 
+  width: ${props => props.$critical ? '62px' : '55px'};
+  height: ${props => props.$critical ? '62px' : '55px'};
+  background: ${props => props.$critical ?
+    'linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%)' :
     'linear-gradient(135deg, #4AE2C0 0%, #3BA99C 100%)'};
-  border-radius: 50%;
+  /* Critical nodes are hexagon, standard nodes are circular */
+  border-radius: ${props => props.$critical ? '0' : '50%'};
+  clip-path: ${props => props.$critical ?
+    'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)' :
+    'none'};
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px ${props => props.$critical ? 
-    'rgba(255, 107, 107, 0.3)' : 
-    'rgba(74, 226, 192, 0.3)'};
+  box-shadow: ${props => props.$critical ? 'none' :
+    `0 4px 15px rgba(74, 226, 192, 0.3)`};
   z-index: ${props => props.$selected ? 10 : 1};
   opacity: ${props => props.$dimmed ? 0.3 : (props.$visible ? 1 : 0)};
   transform: scale(${props => props.$visible ? (props.$selected ? 1.2 : 1) : 0})
     translate(-50%, -50%);
   pointer-events: ${props => props.$dimmed ? 'none' : 'auto'};
-  
+
+  /* Add "!" indicator for critical nodes - visible without color */
+  &::after {
+    content: ${props => props.$critical ? '"!"' : '""'};
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    background: #FFD700;
+    color: #000;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    display: ${props => props.$critical ? 'flex' : 'none'};
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #001833;
+    z-index: 20;
+  }
+
   &::before {
     content: '';
     position: absolute;
     inset: -3px;
-    border-radius: 50%;
-    background: ${props => props.$selected ? 
-      (props.$critical ? '#FF6B6B' : '#4AE2C0') : 
+    border-radius: ${props => props.$critical ? '0' : '50%'};
+    clip-path: ${props => props.$critical ?
+      'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)' :
+      'none'};
+    background: ${props => props.$selected ?
+      (props.$critical ? '#FF6B6B' : '#4AE2C0') :
       'transparent'};
     opacity: ${props => props.$selected ? 0.3 : 0};
     z-index: -1;
   }
-  
+
   &:hover:not([disabled]) {
     transform: scale(${props => props.$selected ? 1.2 : 1.1}) translate(-50%, -50%);
     z-index: 11;
-    box-shadow: 0 6px 25px ${props => props.$critical ? 
-      'rgba(255, 107, 107, 0.5)' : 
-      'rgba(74, 226, 192, 0.5)'};
   }
-  
-  &:focus {
-    outline: 2px solid ${props => props.$critical ? '#FF6B6B' : '#4AE2C0'};
+
+  &:focus-visible {
+    outline: 3px solid ${props => props.$critical ? '#FF6B6B' : '#4AE2C0'};
     outline-offset: 4px;
   }
-  
+
   svg {
     width: 28px;
     height: 28px;
     stroke: white;
     fill: none;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    &:hover:not([disabled]) {
+      transform: translate(-50%, -50%);
+    }
   }
 `;
 
@@ -207,7 +238,7 @@ const CenterHub = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 14px;
   color: #4AE2C0;
   font-weight: 600;
   text-align: center;
@@ -304,12 +335,12 @@ const RegBadge = styled.span`
 const RegTag = styled.span`
   display: inline-block;
   padding: 3px 10px;
-  background: ${props => props.$highlight ? 'rgba(74, 226, 192, 0.15)' : 'rgba(255, 255, 255, 0.08)'};
+  background: ${props => props.$highlight ? 'rgba(74, 226, 192, 0.15)' : 'rgba(255, 255, 255, 0.12)'};
   border-radius: 8px;
-  font-size: 12px;
-  color: ${props => props.$highlight ? '#4AE2C0' : 'rgba(255, 255, 255, 0.7)'};
+  font-size: 14px;
+  color: ${props => props.$highlight ? '#4AE2C0' : '#E0E0E0'};
   font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
-  border: 1px solid ${props => props.$highlight ? 'rgba(74, 226, 192, 0.3)' : 'rgba(255, 255, 255, 0.15)'};
+  border: 1px solid ${props => props.$highlight ? 'rgba(74, 226, 192, 0.3)' : 'rgba(255, 255, 255, 0.2)'};
   font-weight: ${props => props.$highlight ? '500' : '400'};
 `;
 
@@ -357,7 +388,7 @@ const AIInsightBox = styled.div`
   border-radius: 10px;
   border: 1px solid rgba(255, 107, 107, 0.2);
   position: relative;
-  
+
   &::before {
     content: 'IRB MUST DETERMINE';
     position: absolute;
@@ -366,7 +397,7 @@ const AIInsightBox = styled.div`
     padding: 3px 12px;
     background: #001833;
     color: #FF6B6B;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.8px;
     border-radius: 8px;
@@ -381,7 +412,7 @@ const PracticalQuestionsBox = styled.div`
   border: 1px solid rgba(139, 69, 255, 0.2);
   position: relative;
   margin-top: 6px;
-  
+
   &::before {
     content: 'PRACTICAL QUESTIONS';
     position: absolute;
@@ -390,7 +421,7 @@ const PracticalQuestionsBox = styled.div`
     padding: 3px 12px;
     background: #001833;
     color: #8B45FF;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.8px;
     border-radius: 8px;
@@ -402,15 +433,15 @@ const QuestionsList = styled.ul`
   margin: 6px 0 0 0;
   padding-left: 18px;
   list-style: none;
-  
+
   li {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 13px;
+    color: #FFFFFF;
+    font-size: 14px;
     line-height: 1.45;
     margin-bottom: 6px;
     position: relative;
     padding-left: 14px;
-    
+
     &::before {
       content: '•';
       position: absolute;
@@ -470,8 +501,8 @@ const FoundationText = styled.div`
 `;
 
 const FoundationRefs = styled.div`
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  color: #E0E0E0;
   font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
   padding-left: 20px;
   border-left: 1px solid rgba(74, 226, 192, 0.2);
@@ -479,46 +510,52 @@ const FoundationRefs = styled.div`
   gap: 16px;
   align-items: center;
   white-space: nowrap;
-  
+
   .cfr21 {
-    color: ${props => props.$highlight21CFR ? '#FFD700' : 'rgba(255, 255, 255, 0.7)'};
+    color: ${props => props.$highlight21CFR ? '#FFD700' : '#E0E0E0'};
     font-weight: ${props => props.$highlight21CFR ? '600' : '400'};
     transition: all 0.3s ease;
   }
-  
+
   .cfr45 {
-    color: ${props => props.$highlight45CFR ? '#FFD700' : 'rgba(255, 255, 255, 0.7)'};
+    color: ${props => props.$highlight45CFR ? '#FFD700' : '#E0E0E0'};
     font-weight: ${props => props.$highlight45CFR ? '600' : '400'};
     transition: all 0.3s ease;
   }
-  
+
   .cfr32 {
-    color: ${props => props.$highlight32CFR ? '#FFD700' : 'rgba(255, 255, 255, 0.7)'};
+    color: ${props => props.$highlight32CFR ? '#FFD700' : '#E0E0E0'};
     font-weight: ${props => props.$highlight32CFR ? '600' : '400'};
     transition: all 0.3s ease;
   }
-  
+
   .fda {
-    color: ${props => props.$highlightFDA ? '#FF6B6B' : 'rgba(255, 255, 255, 0.7)'};
+    color: ${props => props.$highlightFDA ? '#FF6B6B' : '#E0E0E0'};
     font-weight: ${props => props.$highlightFDA ? '600' : '400'};
     transition: all 0.3s ease;
   }
-  
+
   .iso {
-    color: ${props => props.$highlightISO ? '#4AE2C0' : 'rgba(255, 255, 255, 0.7)'};
+    color: ${props => props.$highlightISO ? '#4AE2C0' : '#E0E0E0'};
     font-weight: ${props => props.$highlightISO ? '600' : '400'};
     transition: all 0.3s ease;
   }
-  
+
   .cures {
-    color: ${props => props.$highlightCures ? '#FFA500' : 'rgba(255, 255, 255, 0.7)'};
+    color: ${props => props.$highlightCures ? '#FFA500' : '#E0E0E0'};
     font-weight: ${props => props.$highlightCures ? '600' : '400'};
     transition: all 0.3s ease;
   }
-  
+
   .separator {
-    color: rgba(74, 226, 192, 0.4);
+    color: rgba(74, 226, 192, 0.5);
     font-weight: 300;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cfr21, .cfr45, .cfr32, .fda, .iso, .cures {
+      transition: none;
+    }
   }
 `;
 

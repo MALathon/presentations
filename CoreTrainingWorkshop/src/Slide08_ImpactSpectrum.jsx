@@ -8,13 +8,19 @@ import styled from 'styled-components';
 const Subtitle = styled.h2`
   font-size: 20px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  color: #E0E0E0;
   text-align: center;
   margin: 10px 0 25px 0;
   letter-spacing: 0.5px;
   opacity: ${props => props.$visible ? 1 : 0};
   transform: translateY(${props => props.$visible ? 0 : '20px'});
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
 `;
 
 const SpectrumContainer = styled.div`
@@ -40,19 +46,51 @@ const SpectrumBar = styled.div`
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 
+  /* Gradient line in center */
   &::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 0;
     right: 0;
-    height: 2px;
+    height: 3px;
     background: linear-gradient(90deg,
       #4CAF50 0%,
       #FFC107 50%,
       #F44336 100%
     );
     transform: translateY(-50%);
+  }
+
+  /* Pattern overlay for accessibility - dots on left, lines in middle, stripes on right */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 30%,
+        rgba(255, 255, 255, 0.03) 30%,
+        rgba(255, 255, 255, 0.03) 33%
+      ),
+      repeating-linear-gradient(
+        45deg,
+        transparent 66%,
+        rgba(255, 255, 255, 0.05) 66%,
+        rgba(255, 255, 255, 0.05) 100%
+      );
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    transform: scaleX(1);
+    opacity: 1;
   }
 `;
 
@@ -71,6 +109,14 @@ const SpectrumLabel = styled.div`
   opacity: ${props => props.$visible ? 1 : 0};
   transition: opacity 0.6s ease;
   transition-delay: ${props => props.$delay}s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    opacity: 1;
+  }
 `;
 
 const ImpactLevels = styled.div`
@@ -81,11 +127,11 @@ const ImpactLevels = styled.div`
 `;
 
 const ImpactCard = styled.div`
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid ${props => {
-    if (props.$level === 'low') return 'rgba(76, 175, 80, 0.4)';
-    if (props.$level === 'moderate') return 'rgba(255, 193, 7, 0.4)';
-    return 'rgba(244, 67, 54, 0.4)';
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid ${props => {
+    if (props.$level === 'low') return 'rgba(76, 175, 80, 0.5)';
+    if (props.$level === 'moderate') return 'rgba(255, 193, 7, 0.5)';
+    return 'rgba(244, 67, 54, 0.5)';
   }};
   border-radius: 12px;
   padding: 18px;
@@ -99,27 +145,48 @@ const ImpactCard = styled.div`
   &:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.12);
   }
 
+  /* Level badge with icon - accessibility marker beyond color */
   &::before {
-    content: '';
+    content: ${props => {
+      if (props.$level === 'low') return '"✓ LOW"';
+      if (props.$level === 'moderate') return '"⚠ MOD"';
+      return '"✗ HIGH"';
+    }};
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: ${props => {
+      if (props.$level === 'low') return '12px';      /* Pill for low */
+      if (props.$level === 'moderate') return '4px';   /* Rounded square for moderate */
+      return '0';                                       /* Square for high */
+    }};
     background: ${props => {
       if (props.$level === 'low') return '#4CAF50';
       if (props.$level === 'moderate') return '#FFC107';
       return '#F44336';
     }};
-    box-shadow: 0 0 15px ${props => {
+    color: ${props => props.$level === 'moderate' ? '#000' : '#FFF'};
+    box-shadow: 0 2px 8px ${props => {
       if (props.$level === 'low') return 'rgba(76, 175, 80, 0.5)';
       if (props.$level === 'moderate') return 'rgba(255, 193, 7, 0.5)';
       return 'rgba(244, 67, 54, 0.5)';
     }};
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    transform: none;
+    opacity: 1;
+
+    &:hover {
+      transform: none;
+    }
   }
 `;
 
@@ -136,20 +203,20 @@ const ImpactTitle = styled.h3`
 
 const ImpactDescription = styled.p`
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.85);
+  color: #FFFFFF;
   line-height: 1.4;
   margin: 0 0 10px 0;
 `;
 
 const ImpactExample = styled.div`
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  color: #E0E0E0;
   font-style: italic;
   padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 
   strong {
-    color: rgba(255, 255, 255, 0.9);
+    color: #FFFFFF;
     font-weight: 600;
   }
 `;
@@ -168,12 +235,12 @@ const OversightIndicator = styled.div`
 `;
 
 const OversightText = styled.p`
-  color: rgba(255, 255, 255, 0.9);
+  color: #FFFFFF;
   font-size: 16px;
   margin: 0;
 
   strong {
-    color: #7986CB;
+    color: #9FA8DA;
   }
 `;
 
@@ -221,13 +288,13 @@ const Slide08_ImpactSpectrum = () => {
         <SpectrumBar $visible={true} $delay="0.4s" />
         <SpectrumLabels>
           <SpectrumLabel $color="#4CAF50" $visible={true} $delay={0}>
-            Minimal
+            <span>✓</span> Minimal
           </SpectrumLabel>
           <SpectrumLabel $color="#FFC107" $visible={true} $delay={0.1}>
-            Moderate
+            <span>⚠</span> Moderate
           </SpectrumLabel>
           <SpectrumLabel $color="#F44336" $visible={true} $delay={0.2}>
-            Significant
+            <span>✗</span> Significant
           </SpectrumLabel>
         </SpectrumLabels>
 

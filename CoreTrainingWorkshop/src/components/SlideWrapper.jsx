@@ -34,6 +34,20 @@ const StyledSlide = styled(CleanSlide)`
   flex-direction: column;
   padding: 0;
   overflow: hidden;
+
+  /* Focus visible support for accessibility */
+  &:focus-visible {
+    outline: 3px solid #4AE2C0;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 `;
 
 // Header bar with slide number and title
@@ -91,7 +105,7 @@ const SlideNumber = styled.div`
 // Slide title in header
 const SlideTitle = styled.div`
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.9);
+  color: #FFFFFF;
   font-weight: 600;
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   letter-spacing: 0.5px;
@@ -112,26 +126,26 @@ const OrgLogo = styled.div`
 
 // Footer text styling
 const FooterText = styled.div`
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  color: #E0E0E0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 `;
 
 // Navigation hint in footer center
 const NavigationHint = styled.div`
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  color: #F5F5F5;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: flex;
   align-items: center;
   gap: 6px;
 
   kbd {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
     padding: 2px 6px;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
     display: inline-block;
     min-width: 20px;
@@ -169,8 +183,12 @@ const Dot = styled.div`
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: ${props => props.$active ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.3)'};
+  background: ${props => props.$active ? '#FFFFFF' : 'rgba(255, 255, 255, 0.5)'};
   transition: all 0.3s ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `;
 
 /**
