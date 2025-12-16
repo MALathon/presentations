@@ -182,7 +182,7 @@ const Slide01_Title = () => {
 
         <PresenterInfo>
           <PresenterName>Mark Lifson, PhD</PresenterName>
-          <PresenterTitle>AI Research & Ethics Specialist</PresenterTitle>
+          <PresenterTitle>AI/ML Director</PresenterTitle>
         </PresenterInfo>
 
         <EventInfo>
