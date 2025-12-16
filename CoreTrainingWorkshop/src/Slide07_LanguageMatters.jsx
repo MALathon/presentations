@@ -77,12 +77,12 @@ const Column = styled.div`
 
 const ColumnHeader = styled.div`
   background: ${props => props.$clinical ?
-    'linear-gradient(135deg, rgba(255, 67, 67, 0.2) 0%, rgba(200, 34, 34, 0.1) 100%)' :
-    'linear-gradient(135deg, rgba(33, 150, 243, 0.2) 0%, rgba(25, 118, 210, 0.1) 100%)'
+    'linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%)' :
+    'linear-gradient(135deg, rgba(96, 165, 250, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%)'
   };
   border: 2px solid ${props => props.$clinical ?
-    'rgba(255, 67, 67, 0.5)' :
-    'rgba(33, 150, 243, 0.5)'
+    'rgba(251, 191, 36, 0.5)' :
+    'rgba(96, 165, 250, 0.5)'
   };
   border-radius: 8px;
   padding: 8px 12px;
@@ -96,7 +96,7 @@ const ColumnHeader = styled.div`
 const ColumnTitle = styled.h2`
   font-size: 16px;
   font-weight: 600;
-  color: ${props => props.$clinical ? '#FF6B6B' : '#64B5F6'};
+  color: ${props => props.$clinical ? '#FBBF24' : '#60A5FA'};
   margin: 0;
   display: flex;
   align-items: center;
@@ -117,14 +117,14 @@ const fadeInScale = keyframes`
 const KeyWord = styled.span`
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid ${props => props.$clinical ?
-    'rgba(255, 67, 67, 0.4)' :
-    'rgba(33, 150, 243, 0.4)'
+    'rgba(251, 191, 36, 0.4)' :
+    'rgba(96, 165, 250, 0.4)'
   };
   border-radius: 4px;
   padding: 4px 10px;
   font-size: 14px;
   font-weight: 600;
-  color: ${props => props.$clinical ? '#FF6B6B' : '#64B5F6'};
+  color: ${props => props.$clinical ? '#FBBF24' : '#60A5FA'};
   margin: 0 3px;
   display: inline-flex;
   align-items: center;
@@ -156,16 +156,16 @@ const ExamplesSection = styled.div`
 
 const ExampleCard = styled.div`
   background: ${props => props.$type === 'clinical' ?
-    'rgba(255, 67, 67, 0.06)' :
+    'rgba(251, 191, 36, 0.06)' :
     props.$type === 'ambiguous' ?
-    'rgba(156, 39, 176, 0.06)' :
-    'rgba(33, 150, 243, 0.06)'
+    'rgba(45, 212, 191, 0.06)' :
+    'rgba(96, 165, 250, 0.06)'
   };
   border-left: 3px solid ${props => props.$type === 'clinical' ?
-    '#FF6B6B' :
+    '#FBBF24' :
     props.$type === 'ambiguous' ?
-    '#AB47BC' :
-    '#64B5F6'
+    '#2DD4BF' :
+    '#60A5FA'
   };
   border-radius: 6px;
   padding: 8px 14px;
@@ -191,8 +191,8 @@ const ExampleText = styled.p`
   line-height: 1.35;
 
   .highlight-clinical {
-    background: rgba(255, 67, 67, 0.2);
-    color: #FF6B6B;
+    background: rgba(251, 191, 36, 0.2);
+    color: #FBBF24;
     padding: 2px 6px;
     border-radius: 3px;
     font-weight: 600;
@@ -204,8 +204,8 @@ const ExampleText = styled.p`
   }
 
   .highlight-exploratory {
-    background: rgba(33, 150, 243, 0.2);
-    color: #64B5F6;
+    background: rgba(96, 165, 250, 0.2);
+    color: #60A5FA;
     padding: 2px 6px;
     border-radius: 3px;
     font-weight: 600;
@@ -217,8 +217,8 @@ const ExampleText = styled.p`
   }
 
   .highlight-ambiguous {
-    background: rgba(156, 39, 176, 0.2);
-    color: #CE93D8;
+    background: rgba(45, 212, 191, 0.2);
+    color: #2DD4BF;
     padding: 2px 6px;
     border-radius: 3px;
     font-weight: 600;
@@ -234,10 +234,10 @@ const ExampleLabel = styled.span`
   font-size: 14px;
   font-weight: 600;
   color: ${props => props.$type === 'clinical' ?
-    '#FF6B6B' :
+    '#FBBF24' :
     props.$type === 'ambiguous' ?
-    '#CE93D8' :
-    '#64B5F6'
+    '#2DD4BF' :
+    '#60A5FA'
   };
   text-transform: uppercase;
   letter-spacing: 0.7px;
